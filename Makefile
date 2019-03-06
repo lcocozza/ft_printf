@@ -3,11 +3,15 @@
 NAME= libftprintf.a
 
 SRC_NAME=	ft_printf.c \
+		ft_split_format.c \
+		ft_convert.c
 
 LIB_NAME=	ft_putstr.c \
 		ft_putnbr.c \
 		ft_putchar.c \
-		ft_strlen.c
+		ft_strlen.c \
+		ft_strfind.c \
+		ft_strcpy.c
 
 OBJ_NAME= $(SRC_NAME:.c=.o) $(LIB_NAME:.c=.o)
 
