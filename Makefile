@@ -4,6 +4,7 @@ NAME= libftprintf.a
 
 SRC_NAME=	ft_printf.c \
 		ft_split_format.c \
+		ft_format.c \
 		ft_convert.c
 
 LIB_NAME=	ft_putstr.c \
@@ -11,7 +12,13 @@ LIB_NAME=	ft_putstr.c \
 		ft_putchar.c \
 		ft_strlen.c \
 		ft_strfind.c \
-		ft_strcpy.c
+		ft_strcpy.c \
+		ft_memset.c \
+		ft_bzero.c \
+		ft_strnew.c \
+		ft_strrev.c \
+		ft_strlowcase.c \
+		ft_strfind_c.c
 
 OBJ_NAME= $(SRC_NAME:.c=.o) $(LIB_NAME:.c=.o)
 

@@ -1,37 +1,16 @@
 #include "ft_printf.h"
 
-static char	**init_liste(void)
+char	*ft_uitoa_base(unsigned int nb, int base)
 {
-	char **liste;
-	char param[NBPARAM];
-	unsigned int i;
+	char *result;
+	int i;
 	
 	i = 0;
-	liste = malloc(sizeof(char *) * (NBPARAM + 1));
-	while (i < NBPARAM)
-		liste[i++] = malloc(sizeof(char) * LENPARAM);
-	i = 0;
-	ft_strcpy(param, PARAMS);
-	while (i < NBPARAM - 1)
-	{
-		liste[i][0] = '%';
-		liste[i][1] = param[i];
-		liste[i][2] = '\0';
-		i++;
+	result = ft_strnew(11);
+	while (nb)
+	{	
+		result[i++] = (nb % base) + ((base == 16 && (nb % base) > 9) ? 55 : '0');
+		nb /= base;
 	}
-	liste[i] = NULL;
-	return liste;
-}
-
-int	ft_detect_format(t_format info_f, int i)
-{
-	char **liste;
-	int j;
-
-	j = 0;
-	liste = init_liste();
-	while (liste[j])
-		if (ft_strfind(info_f.str[i], liste[j++]))
-			return (j - 1);
-	return -1;
+	return ft_strrev(result);
 }

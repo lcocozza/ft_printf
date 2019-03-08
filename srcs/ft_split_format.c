@@ -9,13 +9,8 @@ static int	ft_seglen(char const *s, int i)
 	{
 		len++;
 		i++;
-		if (s[i] == '%')
-		{
-			len++;
-			i++;
-		}
 	}
-	while (s[i++] != '%' && s[i] != '\0')
+	while (!(ft_strfind_c(PARAMS, s[i])) && s[i++])
 		len++;
 	return len;
 }
@@ -29,11 +24,12 @@ static int	count_ap(char const *s)
 	count = 0;
 	while (s[i++])
 	{
+		if (s[0] != '%')
+			count++;
 		if (s[i] == '%')
 		{
 			count++;
-			if (s[i + 1] == '%')
-				i++;
+			while (!(ft_strfind_c(PARAMS, s[i])) && s[i++]) ;
 		}
 	}
 	return count;
@@ -47,21 +43,20 @@ t_format	ft_split_format(char const *format)
 
 	i = 0;
 	info_f.nb_ap = 0;
-	if ((info_f.str = malloc(sizeof(char *) * count_ap(format) + 1)) == NULL)
-		return info_f;
+	info_f.str = malloc(sizeof(char *) * count_ap(format) + 1)
 	while (format[i])
 	{
 		j = 0;
-		if ((info_f.str[info_f.nb_ap] = malloc(sizeof(char) * ft_seglen(format, i) + 1)) == NULL)
-			return info_f;
+		info_f.str[info_f.nb_ap] = malloc(sizeof(char) * ft_seglen(format, i) + 1)
 		if (format[i] == '%')
 		{
 			info_f.str[info_f.nb_ap][j++] = format[i++];
-			if (format[i] == '%')
+			while (!(ft_strfind_c(PARAMS, format[i])) && format[i])
 				info_f.str[info_f.nb_ap][j++] = format[i++];
 		}
-		while (format[i] != '%' && format[i] != '\0')
-			info_f.str[info_f.nb_ap][j++] = format[i++];
+		else
+			while (format[i] != '%' && format[i] != '\0')
+				info_f.str[info_f.nb_ap][j++] = format[i++];	
 		info_f.str[info_f.nb_ap++][j] = '\0';
 	}
 	info_f.str[info_f.nb_ap] = NULL;
