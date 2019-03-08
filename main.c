@@ -3,7 +3,7 @@
 
 int	main()
 {
-	ft_printf("salut %s toi %hhd test\n");
+	ft_printf("salut %s%% toi %hhd test\n");
 
 	return 0;
 }

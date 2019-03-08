@@ -15,7 +15,9 @@ int	ft_printf(const char *format, ... )
 	va_start(info_f.ap, format);
 	while (i < info_f.nb_ap)
 	{
+		ft_putchar('|');
 		ft_putstr(info_f.str[i]);
+		ft_putchar('|');
 		ft_putchar('\n');
 		i++;
 	}

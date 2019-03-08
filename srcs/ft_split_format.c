@@ -12,7 +12,7 @@ static int	ft_seglen(char const *s, int i)
 	}
 	while (!(ft_strfind_c(PARAMS, s[i])) && s[i++])
 		len++;
-	return len;
+	return ++len;
 }
 
 static int	count_ap(char const *s)
@@ -53,6 +53,7 @@ t_format	ft_split_format(char const *format)
 			info_f.str[info_f.nb_ap][j++] = format[i++];
 			while (!(ft_strfind_c(PARAMS, format[i])) && format[i])
 				info_f.str[info_f.nb_ap][j++] = format[i++];
+			info_f.str[info_f.nb_ap][j++] = format[i++];
 		}
 		else
 			while (format[i] != '%' && format[i] != '\0')
