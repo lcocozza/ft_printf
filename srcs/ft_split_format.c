@@ -43,11 +43,11 @@ t_format	ft_split_format(char const *format)
 
 	i = 0;
 	info_f.nb_ap = 0;
-	info_f.str = malloc(sizeof(char *) * count_ap(format) + 1)
+	info_f.str = malloc(sizeof(char *) * count_ap(format) + 1);
 	while (format[i])
 	{
 		j = 0;
-		info_f.str[info_f.nb_ap] = malloc(sizeof(char) * ft_seglen(format, i) + 1)
+		info_f.str[info_f.nb_ap] = malloc(sizeof(char) * ft_seglen(format, i) + 1);
 		if (format[i] == '%')
 		{
 			info_f.str[info_f.nb_ap][j++] = format[i++];
