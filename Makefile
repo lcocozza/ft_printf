@@ -2,49 +2,45 @@
 
 NAME= libftprintf.a
 
-SRC_NAME=	ft_printf.c \
-		ft_split_format.c \
-		ft_format.c \
-		ft_convert.c
+SRCS_FILE=	ft_split_format.c	ft_format.c			ft_convert.c		\
+			ft_printf.c
 
-LIB_NAME=	ft_putstr.c \
-		ft_putnbr.c \
-		ft_putchar.c \
-		ft_strlen.c \
-		ft_strfind.c \
-		ft_strcpy.c \
-		ft_memset.c \
-		ft_bzero.c \
-		ft_strnew.c \
-		ft_strrev.c \
-		ft_strlowcase.c \
-		ft_strfind_c.c
+LIBFT_FILE=	ft_memset.c			ft_bzero.c			ft_memcpy.c			\
+			ft_memccpy.c	 	ft_memmove.c 		ft_memchr.c			\
+			ft_memcmp.c 		ft_strlen.c 		ft_strdup.c			\
+			ft_strlcpy.c	 	ft_strlcat.c 		ft_strchr.c			\
+			ft_strrchr.c 		ft_strnstr.c 		ft_strncmp.c		\
+			ft_atoi.c 			ft_isalpha.c 		ft_isdigit.c		\
+			ft_isalnum.c	 	ft_isascii.c 		ft_isprint.c		\
+			ft_toupper.c 		ft_tolower.c 		ft_strmapi.c		\
+			ft_strjoin.c 		ft_strtrim.c 		ft_split.c			\
+			ft_itoa.c 			ft_putchar_fd.c 	ft_putstr_fd.c		\
+			ft_putendl_fd.c 	ft_putnbr_fd.c		ft_calloc.c			\
+			ft_substr.c			ft_lstnew.c			ft_lstadd_front.c	\
+			ft_lstsize.c 		ft_lstlast.c		ft_lstadd_back.c 	\
+			ft_lstdelone.c		ft_lstclear.c 		ft_lstiter.c		\
 
-OBJ_NAME= $(SRC_NAME:.c=.o) $(LIB_NAME:.c=.o)
+OBJS=	$(SRCS:.c=.o) $(LIBFT:.c=.o)
 
-SRC_PATH= srcs/
-OBJ_PATH= objs/
-LIB_PATH= libs/
-INC_PATH= -I incls/
+SRCS_PATH=	sources/
+LIBFT_PATH=	libft/
 
-SRC= $(addprefix $(SRC_PATH), $(SRC_NAME))
-OBJ= $(addprefix $(OBJ_PATH), $(OBJ_NAME))
-LIB= $(addprefix $(LIB_PATH), $(LIB_NAME))
+SRCS=	$(addprefix $(SRCS_PATH), $(SRCS_FILE))
+LIBFT=	$(addprefix $(LIBFT_PATH), $(LIBFT_FILE))
 
-FLAGS= -Wall -Wextra -Werror
+CC= gcc
 
-$(NAME): all
+CFLAGS= -Wall -Wextra -Werror -I includes/
 
-all:
-	gcc $(FLAGS) -c $(SRC) $(LIB) $(INC_PATH) 
-	mv $(OBJ_NAME) $(OBJ_PATH)
-	ar rc $(NAME) $(OBJ)
-	ranlib $(NAME)
+all: $(NAME)
+
+$(NAME): $(OBJS)
+	ar rcs $(NAME) $(OBJS)
 
 clean:
-	rm $(OBJ)
+	rm -f $(OBJS)
 
 fclean: clean
-	rm $(NAME)
+	rm -f $(NAME)
 
 re: fclean all
