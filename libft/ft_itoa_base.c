@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 15:13:33 by lucocozz          #+#    #+#             */
-/*   Updated: 2019/11/02 17:13:33 by lucocozz         ###   ########.fr       */
+/*   Updated: 2019/11/07 19:04:31 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,16 @@ static int	ft_number_len(long n, int base)
 char		*ft_itoa_base(int n, int base)
 {
 	int		i;
+	long	nb;
 	char	*strnew;
 
-	i = ft_number_len(n, base);
+	nb = (long)n;
+	i = ft_number_len(nb, base);
 	if ((strnew = ft_calloc(i + 1, sizeof(char))) == NULL)
 		return (NULL);
 	strnew[i--] = '\0';
 	if (n == 0)
 		return (ft_strdup("0"));
-	if (n == -2147483648)
-		return (ft_strdup("-2147483648"));
 	if (n < 0)
 	{
 		strnew[0] = '-';
@@ -50,7 +50,7 @@ char		*ft_itoa_base(int n, int base)
 	}
 	while (n > 0)
 	{
-		strnew[i] = (n % base) + '0';
+		strnew[i] = (n % base) + ((base == 16 && (n % base) > 9) ? 55 : '0');
 		n /= base;
 		i--;
 	}
