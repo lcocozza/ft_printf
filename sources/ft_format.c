@@ -1,11 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_format.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/10/31 17:34:35 by lucocozz          #+#    #+#             */
+/*   Updated: 2019/10/31 17:35:47 by lucocozz         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
 static char	**init_liste(void)
 {
-	char **liste;
-	char param[NBPARAM];
-	unsigned int i;
-	
+	char	**liste;
+	char	param[NBPARAM];
+	size_t	i;
+
 	i = 0;
 	liste = malloc(sizeof(char *) * (NBPARAM + 1));
 	while (i < NBPARAM)
@@ -20,18 +32,18 @@ static char	**init_liste(void)
 		i++;
 	}
 	liste[i] = NULL;
-	return liste;
+	return (liste);
 }
 
-int	ft_detect_format(t_format info_f, int i)
+int			ft_detect_format(t_format info_f, int i)
 {
-	char **liste;
-	int j;
+	char	**liste;
+	int		j;
 
 	j = 0;
 	liste = init_liste();
 	while (liste[j])
 		if (ft_strfind(info_f.str[i], liste[j++]))
 			return (j - 1);
-	return -1;
+	return (-1);
 }
