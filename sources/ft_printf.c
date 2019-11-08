@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 16:53:30 by lucocozz          #+#    #+#             */
-/*   Updated: 2019/11/07 19:05:43 by lucocozz         ###   ########.fr       */
+/*   Updated: 2019/11/08 18:09:48 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,8 @@
 
 int	ft_printf(const char *format, ...)
 {
-
+	int		len;
+	va_list	varg;
+	
+		
 }
