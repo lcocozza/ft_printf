@@ -5,54 +5,37 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/08 15:13:33 by lucocozz          #+#    #+#             */
-/*   Updated: 2019/11/07 19:04:31 by lucocozz         ###   ########.fr       */
+/*   Created: 2019/11/22 02:15:43 by lucocozz          #+#    #+#             */
+/*   Updated: 2019/11/22 02:16:38 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_number_len(long n, int base)
+char	*ft_itoa_base(int value, char *base)
 {
-	int	len;
+	int					count;
+	unsigned int		tmp;
+	char				*res;
+	unsigned int		base_length;
 
-	len = 0;
-	if (n < 0)
-	{
-		n = n * -1;
-		len++;
-	}
-	while (n > 0)
-	{
-		n = n / base;
-		len++;
-	}
-	return (len);
-}
-
-char		*ft_itoa_base(int n, int base)
-{
-	int		i;
-	long	nb;
-	char	*strnew;
-
-	nb = (long)n;
-	i = ft_number_len(nb, base);
-	if ((strnew = ft_calloc(i + 1, sizeof(char))) == NULL)
+	base_length = ft_strlen(base);
+	count = (value < 0 ? 2 : 1);
+	tmp = (value < 0 ? -value : value);
+	while (tmp >= base_length && (tmp /= base_length))
+		++count;
+	tmp = (value < 0 ? -value : value);
+	if (!(res = (char*)malloc(sizeof(char) * (count + 1))))
 		return (NULL);
-	strnew[i--] = '\0';
-	if (n == 0)
-		return (ft_strdup("0"));
-	if (n < 0)
+	if (value < 0)
+		res[0] = '-';
+	res[count] = '\0';
+	while (tmp >= base_length)
 	{
-		strnew[0] = '-';
-		n *= -1;
+		--count;
+		res[count] = base[tmp % base_length];
+		tmp /= base_length;
 	}
-	while (n > 0)
-	{
-		strnew[i] = (n % base) + ((base == 16 && (n % base) > 9) ? 55 : '0');
-		n /= base;
-		i--;
-	}
-	return (strnew);
+	res[--count] = base[tmp % base_length];
+	return (res);
 }

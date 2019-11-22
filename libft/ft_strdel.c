@@ -1,20 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstlast_bonus.c                                 :+:      :+:    :+:   */
+/*   ft_strdel.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcocozza <lcocozza@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/11 14:22:49 by lucocozz          #+#    #+#             */
-/*   Updated: 2019/10/12 22:32:14 by lcocozza         ###   ########.fr       */
+/*   Created: 2019/11/19 16:36:06 by lucocozz          #+#    #+#             */
+/*   Updated: 2019/11/19 16:37:33 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstlast(t_list *lst)
+void	ft_strdel(char	*s)
 {
-	while (lst->next != NULL)
-		lst = lst->next;
-	return (lst);
+	if (s)
+	{
+		free(s);
+		s = NULL;
+	}
 }

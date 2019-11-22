@@ -1,29 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_front_bonus.c                            :+:      :+:    :+:   */
+/*   ft_swap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/11 14:13:21 by lucocozz          #+#    #+#             */
-/*   Updated: 2019/10/11 14:17:33 by lucocozz         ###   ########.fr       */
+/*   Created: 2019/11/12 16:05:34 by lucocozz          #+#    #+#             */
+/*   Updated: 2019/11/12 16:07:27 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstadd_front(t_list **alst, t_list *new)
+void	ft_swap(void **pt1, void **pt2)
 {
-	t_list *elem;
-	t_list *tmp;
+	void	*tmp;
 
-	tmp = *alst;
-	if (!tmp)
-		*alst = new;
-	else
-	{
-		elem = new;
-		elem->next = tmp;
-		*alst = elem;
-	}
+	tmp = *pt1;
+	*pt1 = *pt2;
+	*pt2 = tmp;
 }

@@ -1,26 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsize_bonus.c                                 :+:      :+:    :+:   */
+/*   ft_lputstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/11 14:19:50 by lucocozz          #+#    #+#             */
-/*   Updated: 2019/10/11 14:20:57 by lucocozz         ###   ########.fr       */
+/*   Created: 2019/11/12 20:54:39 by lucocozz          #+#    #+#             */
+/*   Updated: 2019/11/12 21:01:25 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_lstsize(t_list *lst)
+int	ft_lputstr(char const *s)
 {
-	int size;
+	int	len;
 
-	size = 0;
-	while (lst)
-	{
-		lst = lst->next;
-		size++;
-	}
-	return (size);
+	len = ft_strlen(s);
+	write(1, s, len);
+	return (len);
 }

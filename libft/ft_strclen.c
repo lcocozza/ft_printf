@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone_bonus.c                               :+:      :+:    :+:   */
+/*   ft_strclen.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/11 14:29:05 by lucocozz          #+#    #+#             */
-/*   Updated: 2019/10/15 11:49:35 by lucocozz         ###   ########.fr       */
+/*   Created: 2019/11/12 15:59:01 by lucocozz          #+#    #+#             */
+/*   Updated: 2019/11/15 22:00:40 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstdelone(t_list *lst, void (*del)(void*))
+size_t	ft_strclen(const char *s, char c)
 {
-	if (lst)
-	{
-		(*del)(lst->content);
-		free(lst);
-	}
+	int	i;
+
+	i = 0;
+	while (s[i] && s[i] != c)
+		i++;
+	return (s[i] == c ? i : -1);
 }

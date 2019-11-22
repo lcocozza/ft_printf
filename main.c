@@ -3,7 +3,12 @@
 
 int	main()
 {
-	ft_printf("salut %s%% toi %hhd test\n");
+	char	*mem;
 
-	return 0;
+	mem = ft_strdup("memory");
+	ft_printf("Hello %c world\n", 'c');
+	// printf("ptr=%p\n", mem);
+	free(mem);
+
+	return (0);
 }

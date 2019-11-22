@@ -1,20 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_count_word.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/10 17:23:59 by lucocozz          #+#    #+#             */
-/*   Updated: 2019/10/10 22:00:10 by lucocozz         ###   ########.fr       */
+/*   Created: 2019/11/12 17:00:46 by lucocozz          #+#    #+#             */
+/*   Updated: 2019/11/12 17:15:49 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putstr_fd(char const *s, int fd)
+int		ft_count_word(const char *str)
 {
-	if (!s)
-		return ;
-	write(fd, s, ft_strlen(s));
+	int	i;
+	int	nb;
+	int	bl;
+
+	i = 0;
+	nb = 0;
+	while (str[i])
+	{
+		bl = 0;
+		while (str[i] == ft_isspace(str[i]) && str[i])
+			i++;
+		while (str[i] != ft_isspace(str[i]) && str[i])
+		{
+			nb += (bl ? 0 : 1);
+			bl = 1;
+			i++;
+		}
+	}
+	return (nb);
 }

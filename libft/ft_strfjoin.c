@@ -1,32 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*   ft_strfjoin.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/04 12:16:41 by lucocozz          #+#    #+#             */
-/*   Updated: 2019/10/28 17:58:10 by lucocozz         ###   ########.fr       */
+/*   Created: 2019/10/08 10:12:14 by lucocozz          #+#    #+#             */
+/*   Updated: 2019/11/19 16:42:19 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlcpy(char *dest, const char *src, size_t dstsize)
+char	*ft_strfjoin(char *s1, char const *s2)
 {
-	size_t	i;
+	int		i;
+	int		j;
+	char	*strnew;
 
 	i = 0;
-	if (!dest || !src)
-		return (0);
-	if (dstsize > 0)
+	j = 0;
+	if (!s1 || !s2)
+		return (NULL);
+	if (s1[0] == '\0' && s2[0] == '\0')
+		return (ft_strdup(""));
+	strnew = (char *)ft_calloc(ft_strlen(s1) + ft_strlen(s2) + 1, sizeof(char));
+	if (strnew == NULL)
+		return (NULL);
+	while (s1[i])
 	{
-		while (src[i] && i < dstsize - 1)
-		{
-			dest[i] = src[i];
-			i++;
-		}
-		dest[i] = '\0';
+		strnew[i] = s1[i];
+		i++;
 	}
-	return (ft_strlen(src));
+	while (s2[j])
+		strnew[i++] = s2[j++];
+	strnew[i] = '\0';
+	ft_strdel(s1);
+	return (strnew);
 }

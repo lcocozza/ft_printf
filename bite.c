@@ -1,24 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew_bonus.c                                  :+:      :+:    :+:   */
+/*   bite.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/11 14:10:08 by lucocozz          #+#    #+#             */
-/*   Updated: 2019/10/11 14:13:02 by lucocozz         ###   ########.fr       */
+/*   Created: 2019/11/19 18:51:43 by lucocozz          #+#    #+#             */
+/*   Updated: 2019/11/19 18:53:05 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <stdio.h>
 
-t_list	*ft_lstnew(void *content)
+int	main()
 {
-	t_list *elem;
+	printf("%04.d\n", 42);
 
-	if ((elem = malloc(sizeof(t_list) * 1)) == NULL)
-		return (NULL);
-	elem->content = content;
-	elem->next = NULL;
-	return (elem);
+	return (0);
 }
