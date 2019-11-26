@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 17:33:12 by lucocozz          #+#    #+#             */
-/*   Updated: 2019/11/21 03:11:34 by lucocozz         ###   ########.fr       */
+/*   Updated: 2019/11/22 20:10:48 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ typedef struct	s_format
 	int			len;
 	char		*arg;
 	char		*param;
-	char		*buffer;
+	char		*buff;
 	va_list 	ap_cpy;
 	va_list		ap;
 }				t_format;

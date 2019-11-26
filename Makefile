@@ -19,7 +19,8 @@ LIBFT_FILE=	ft_memset.c			ft_bzero.c			ft_memcpy.c		\
 			ft_realloc.c		ft_lputstr.c		ft_strcat.c		\
 			ft_strcpy.c			ft_strdel.c			ft_strfjoin.c	\
 			ft_convert_base.c	ft_atoi_base.c		ft_itoa_base.c	\
-			ft_uitoa_base.c
+			ft_uitoa_base.c		ft_strrev.c			ft_nbrlen.c		\
+			ft_subfstr.c		ft_uitoa.c			ft_strscat.c
 
 
 OBJS=	$(SRCS:.c=.o) $(LIBFT:.c=.o)

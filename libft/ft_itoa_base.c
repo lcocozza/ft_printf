@@ -6,36 +6,45 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 02:15:43 by lucocozz          #+#    #+#             */
-/*   Updated: 2019/11/22 02:16:38 by lucocozz         ###   ########.fr       */
+/*   Updated: 2019/11/22 04:10:50 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_itoa_base(int value, char *base)
+static char	*ft_conv(int nbr, char *base_to, char *str, int neg)
 {
-	int					count;
-	unsigned int		tmp;
-	char				*res;
-	unsigned int		base_length;
+	int i;
+	int size;
 
-	base_length = ft_strlen(base);
-	count = (value < 0 ? 2 : 1);
-	tmp = (value < 0 ? -value : value);
-	while (tmp >= base_length && (tmp /= base_length))
-		++count;
-	tmp = (value < 0 ? -value : value);
-	if (!(res = (char*)malloc(sizeof(char) * (count + 1))))
-		return (NULL);
-	if (value < 0)
-		res[0] = '-';
-	res[count] = '\0';
-	while (tmp >= base_length)
+	i = 0;
+	size = ft_strlen(base_to);
+	if (nbr == 0)
+		str[i++] = base_to[0];
+	while (nbr > 0)
 	{
-		--count;
-		res[count] = base[tmp % base_length];
-		tmp /= base_length;
+		str[i++] = base_to[nbr % size];
+		nbr /= size;
 	}
-	res[--count] = base[tmp % base_length];
-	return (res);
+	str[i++] = (neg ? '-' : '\0');
+	str[i] = '\0';
+	return (ft_strrev(str));
+}
+
+char		*ft_itoa_base(int nbr, char *base)
+{
+	int		neg;
+	char	*str;
+	int		len;
+
+	neg = 0;
+	len = ft_nbrlen(nbr, ft_strlen(base));
+	if (nbr < 0)
+	{
+		neg = 1;
+		nbr *= -1;
+	}
+	if ((str = ft_calloc(len + 1, sizeof(char))) == NULL)
+		return (NULL);
+	return (ft_conv(nbr, base, str, neg));
 }

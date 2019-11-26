@@ -1,40 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*   ft_strrev.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/08 15:13:33 by lucocozz          #+#    #+#             */
-/*   Updated: 2019/11/22 04:04:01 by lucocozz         ###   ########.fr       */
+/*   Created: 2019/11/22 04:04:34 by lucocozz          #+#    #+#             */
+/*   Updated: 2019/11/22 04:07:42 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char		*ft_itoa(int n)
+char	*ft_strrev(char *str)
 {
 	int		i;
-	char	*strnew;
+	int		j;
+	char	tmp;
 
-	i = ft_nbrlen(n, 10);
-	if ((strnew = ft_calloc(i + 1, sizeof(char))) == NULL)
-		return (NULL);
-	strnew[i--] = '\0';
-	if (n == 0)
-		return (ft_strdup("0"));
-	if (n == -2147483648)
-		return (ft_strdup("-2147483648"));
-	if (n < 0)
+	i = 0;
+	j = ft_strlen(str);
+	while (i < j)
 	{
-		strnew[0] = '-';
-		n *= -1;
+		j--;
+		tmp = str[i];
+		str[i] = str[j];
+		str[j] = tmp;
+		i++;
 	}
-	while (n > 0)
-	{
-		strnew[i] = (n % 10) + '0';
-		n /= 10;
-		i--;
-	}
-	return (strnew);
+	return (str);
 }

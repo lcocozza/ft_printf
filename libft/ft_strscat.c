@@ -1,40 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*   ft_strscat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/08 15:13:33 by lucocozz          #+#    #+#             */
-/*   Updated: 2019/11/22 04:04:01 by lucocozz         ###   ########.fr       */
+/*   Created: 2019/11/25 15:54:27 by lucocozz          #+#    #+#             */
+/*   Updated: 2019/11/25 17:31:53 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char		*ft_itoa(int n)
+char	*ft_strscat(size_t size, ...)
 {
-	int		i;
-	char	*strnew;
-
-	i = ft_nbrlen(n, 10);
-	if ((strnew = ft_calloc(i + 1, sizeof(char))) == NULL)
-		return (NULL);
-	strnew[i--] = '\0';
-	if (n == 0)
-		return (ft_strdup("0"));
-	if (n == -2147483648)
-		return (ft_strdup("-2147483648"));
-	if (n < 0)
+	size_t	i;
+	char	*strn;
+	char	*str;
+	va_list	ap;
+	
+	i = 0;
+	strn = NULL;
+	va_start(ap, size);
+	while (i < size)
 	{
-		strnew[0] = '-';
-		n *= -1;
+		str = va_arg(ap, char *);
+		if (str)
+		{
+			if (!i)
+				strn = str;
+			else
+			{
+				strn = ft_srealloc(strn, ft_strlen(str) + ft_strlen(strn) + 1);
+				ft_strcat(strn, str);
+			}
+		}
+		i++;
 	}
-	while (n > 0)
-	{
-		strnew[i] = (n % 10) + '0';
-		n /= 10;
-		i--;
-	}
-	return (strnew);
+	va_end(ap);
+	return (strn);
 }
