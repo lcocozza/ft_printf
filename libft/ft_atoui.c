@@ -1,40 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strscat.c                                       :+:      :+:    :+:   */
+/*   ft_atoui.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/25 15:54:27 by lucocozz          #+#    #+#             */
-/*   Updated: 2019/11/27 17:44:07 by lucocozz         ###   ########.fr       */
+/*   Created: 2019/07/06 17:54:23 by lucocozz          #+#    #+#             */
+/*   Updated: 2019/11/28 14:31:06 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strscat(size_t size, ...)
+int		ft_atoui(const char *str)
 {
-	size_t	i;
-	char	*strn;
-	char	*str;
-	va_list	ap;
+	int				i;
+	unsigned int	nb;
 
 	i = 0;
-	if (size == 0)
-		return (NULL);
-	va_start(ap, size);
-	while (i < size)
+	nb = 0;
+	while (ft_isspace(str[i]))
+		i++;
+	if (str[i] == '+')
+		i++;
+	while (str[i] >= '0' && str[i] <= '9')
 	{
-		str = va_arg(ap, char *);
-		if (!i)
-			strn = ft_strdup(str);
-		else
-		{
-			strn = ft_srealloc(strn, ft_strlen(str) + ft_strlen(strn) + 1);
-			ft_strcat(strn, str);
-		}
+		nb = nb * 10 + (str[i] - 48);
 		i++;
 	}
-	va_end(ap);
-	return (strn);
+	return (nb);
 }

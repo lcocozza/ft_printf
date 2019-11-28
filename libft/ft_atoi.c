@@ -6,27 +6,27 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/06 17:54:23 by lucocozz          #+#    #+#             */
-/*   Updated: 2019/10/29 14:22:29 by lucocozz         ###   ########.fr       */
+/*   Updated: 2019/11/28 14:29:59 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "libft.h"
 
 int		ft_atoi(const char *str)
 {
 	int i;
 	int nb;
-	int nbsigne;
+	int neg;
 
 	i = 0;
 	nb = 0;
-	nbsigne = 0;
-	while (str[i] == ' ' || (str[i] <= 13 && str[i] >= 9))
+	neg = 0;
+	while (ft_isspace(str[i]))
 		i++;
 	if (str[i] == '-' || str[i] == '+')
 	{
 		if (str[i] == '-')
-			nbsigne++;
+			neg = 1;
 		i++;
 	}
 	while (str[i] >= '0' && str[i] <= '9')
@@ -34,7 +34,5 @@ int		ft_atoi(const char *str)
 		nb = nb * 10 + (str[i] - 48);
 		i++;
 	}
-	if (nbsigne == 1)
-		nb = nb * -1;
-	return (nb);
+	return (neg ? -nb : nb);
 }

@@ -2,7 +2,8 @@
 
 NAME= libftprintf.a
 
-SRCS_FILE=	ft_printf.c			ft_types1.c			ft_types2.c
+SRCS_FILE=	ft_printf.c			ft_types1.c			ft_types2.c		\
+			ft_flags.c
 
 LIBFT_FILE=	ft_memset.c			ft_bzero.c			ft_memcpy.c		\
 			ft_memccpy.c	 	ft_memmove.c 		ft_memchr.c		\
@@ -20,7 +21,9 @@ LIBFT_FILE=	ft_memset.c			ft_bzero.c			ft_memcpy.c		\
 			ft_strcpy.c			ft_strdel.c			ft_strfjoin.c	\
 			ft_convert_base.c	ft_atoi_base.c		ft_itoa_base.c	\
 			ft_uitoa_base.c		ft_strrev.c			ft_nbrlen.c		\
-			ft_subfstr.c		ft_uitoa.c			ft_strscat.c
+			ft_subfstr.c		ft_uitoa.c			ft_strscat.c	\
+			ft_ltoa_base.c		ft_atoui.c			ft_isspace.c	\
+			ft_strfjoinp.c
 
 
 OBJS=	$(SRCS:.c=.o) $(LIBFT:.c=.o)

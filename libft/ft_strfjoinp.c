@@ -1,40 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strscat.c                                       :+:      :+:    :+:   */
+/*   ft_strfjoinp.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/25 15:54:27 by lucocozz          #+#    #+#             */
-/*   Updated: 2019/11/27 17:44:07 by lucocozz         ###   ########.fr       */
+/*   Created: 2019/10/08 10:12:14 by lucocozz          #+#    #+#             */
+/*   Updated: 2019/11/28 18:16:05 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strscat(size_t size, ...)
+char	*ft_strfjoinp(char *s1, char const *s2, int prefix)
 {
-	size_t	i;
-	char	*strn;
-	char	*str;
-	va_list	ap;
+	int		i;
+	int		j;
+	char	*strnew;
 
 	i = 0;
-	if (size == 0)
+	j = 0;
+	if (!s1 || !s2)
 		return (NULL);
-	va_start(ap, size);
-	while (i < size)
-	{
-		str = va_arg(ap, char *);
-		if (!i)
-			strn = ft_strdup(str);
-		else
-		{
-			strn = ft_srealloc(strn, ft_strlen(str) + ft_strlen(strn) + 1);
-			ft_strcat(strn, str);
-		}
-		i++;
-	}
-	va_end(ap);
-	return (strn);
+	if (s1[0] == '\0' && s2[0] == '\0')
+		return (ft_strdup(""));
+	strnew = (char *)ft_calloc(ft_strlen(s1) + ft_strlen(s2) + 1, sizeof(char));
+	if (strnew == NULL)
+		return (NULL);
+	ft_strcpy(strnew, (prefix ? (char*)s2 : s1));
+	ft_strcat(strnew, (prefix ? s1 : (char*)s2));
+	ft_strdel(s1);
+	return (strnew);
 }

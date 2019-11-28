@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/19 16:48:14 by lucocozz          #+#    #+#             */
-/*   Updated: 2019/11/19 17:33:04 by lucocozz         ###   ########.fr       */
+/*   Updated: 2019/11/27 17:42:09 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char	*ft_srealloc(char *str, size_t size)
 {
 	char	*strnew;
-	
+
 	if (!size)
 	{
 		if (str)

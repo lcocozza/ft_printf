@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 20:46:15 by lucocozz          #+#    #+#             */
-/*   Updated: 2019/11/22 20:50:03 by lucocozz         ###   ########.fr       */
+/*   Updated: 2019/11/27 17:44:38 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,3 @@ char		*ft_uitoa(unsigned int n)
 	}
 	return (strnew);
 }
-

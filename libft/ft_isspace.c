@@ -6,13 +6,11 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 16:31:13 by lucocozz          #+#    #+#             */
-/*   Updated: 2019/11/16 19:22:50 by lucocozz         ###   ########.fr       */
+/*   Updated: 2019/11/28 15:08:34 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-int	ft_issapce(int c)
+int	ft_isspace(int c)
 {
 	if (c == ' ' || (c >= '\t' && c <= '\r'))
 		return (1);

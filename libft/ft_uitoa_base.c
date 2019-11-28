@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 03:28:55 by lucocozz          #+#    #+#             */
-/*   Updated: 2019/11/22 03:39:34 by lucocozz         ###   ########.fr       */
+/*   Updated: 2019/11/27 17:46:47 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,22 @@
 
 char	*ft_uitoa_base(unsigned int n, char const *base)
 {
-	unsigned int	len;
-	unsigned int	div;
-	char			*output;
 	unsigned int	i;
-	unsigned int	base_val;
+	int				base_len;
+	char			*strnew;
 
-	base_val = ft_strlen(base);
-	div = 1;
-	len = 1;
-	while (n / div > base_val - 1)
-	{
-		len++;
-		div *= base_val;
-	}
-	if ((output = ft_calloc(len, sizeof(char))) == NULL)
+	if (n == 0)
+		return (ft_strdup(&base[0]));
+	base_len = ft_strlen(base);
+	i = ft_nbrlen(n, base_len);
+	if ((strnew = ft_calloc(i + 1, sizeof(char))) == NULL)
 		return (NULL);
-	i = 0;
-	while (div)
+	strnew[i--] = '\0';
+	while (n > 0)
 	{
-		output[i++] = base[(n / div) % base_val];
-		div /= base_val;
+		strnew[i] = base[(n % base_len)];
+		n /= base_len;
+		i--;
 	}
-	return (output);
+	return (strnew);
 }

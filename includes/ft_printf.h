@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 17:33:12 by lucocozz          #+#    #+#             */
-/*   Updated: 2019/11/22 20:10:48 by lucocozz         ###   ########.fr       */
+/*   Updated: 2019/11/28 21:04:45 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,12 @@ typedef struct	s_types
 
 typedef struct	s_flags
 {
-	char		flags;
-	int			width;
-	int			precision;
-	char		type;
+	int			j;
+	int			z;
+	int			w;
+	int			p;
+	int			is_p;
+	char		t;
 }				t_flags;
 
 typedef struct	s_format
@@ -41,7 +43,6 @@ typedef struct	s_format
 	char		*arg;
 	char		*param;
 	char		*buff;
-	va_list 	ap_cpy;
 	va_list		ap;
 }				t_format;
 
@@ -56,5 +57,10 @@ char			*ft_u(va_list ap, t_flags flags);
 char			*ft_x(va_list ap, t_flags flags);
 char			*ft_xu(va_list ap, t_flags flags);
 char			*ft_per(va_list ap, t_flags flags);
+int				ft_zero(char *s, t_flags *flags);
+int				ft_justify(char *s, t_flags *flags);
+int				ft_width(char *s, t_flags *flags, va_list ap);
+int				ft_precision(char *s, t_flags *flags, va_list ap);
+
 											
 #endif
