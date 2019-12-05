@@ -1,24 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strncpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/27 17:39:40 by lucocozz          #+#    #+#             */
-/*   Updated: 2019/12/05 21:29:22 by lucocozz         ###   ########.fr       */
+/*   Created: 2019/11/12 21:16:58 by lucocozz          #+#    #+#             */
+/*   Updated: 2019/12/05 06:45:17 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-#include <stdio.h>
+#include "libft.h"
 
-int	main()
+char	*ft_strncpy(char *dest, char *src, size_t n)
 {
-	char	*mem = ft_strdup("test");
+	size_t i;
 
-	ft_printf("|%45.7s|\n", mem);
-	printf("|%45.7s|\n", mem);
-	free(mem);
-	return (0);
+	i = 0;
+	while (src[i] && i < n)
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	dest[i] = '\0';
+	return (dest);
 }

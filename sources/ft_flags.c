@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 18:30:28 by lucocozz          #+#    #+#             */
-/*   Updated: 2019/11/28 21:12:18 by lucocozz         ###   ########.fr       */
+/*   Updated: 2019/12/04 18:23:56 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,11 @@ int	ft_precision(char *s, t_flags *flags, va_list ap)
 	int	i;
 
 	i = 0;
-	flags->is_p = (s[i] == '.' ? 1 : 0);
 	if (s[i] == '.')
 	{
 		i++;
 		flags->z = 0;
+		flags->is_p = 1;
 		if (s[i] == '*')
 		{
 			flags->p = va_arg(ap, int);
@@ -68,5 +68,7 @@ int	ft_precision(char *s, t_flags *flags, va_list ap)
 		while (ft_isdigit(s[i]))
 			i++;
 	}
+	else
+		flags->is_p = 0;
 	return (i);
 }

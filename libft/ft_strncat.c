@@ -1,24 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strncat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/27 17:39:40 by lucocozz          #+#    #+#             */
-/*   Updated: 2019/12/05 21:29:22 by lucocozz         ###   ########.fr       */
+/*   Created: 2019/12/05 14:39:03 by lucocozz          #+#    #+#             */
+/*   Updated: 2019/12/05 14:39:36 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-#include <stdio.h>
+#include "libft.h"
 
-int	main()
+char	*ft_strncat(char *dest, char *src, size_t n)
 {
-	char	*mem = ft_strdup("test");
+	int		i;
+	size_t	j;
 
-	ft_printf("|%45.7s|\n", mem);
-	printf("|%45.7s|\n", mem);
-	free(mem);
-	return (0);
+	j = 0;
+	i = ft_strlen(dest);
+	while (src[j] && j < n)
+	{
+		dest[i + j] = src[j];
+		j++;
+	}
+	dest[i + j] = '\0';
+	return (dest);
 }

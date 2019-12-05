@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 02:54:12 by lucocozz          #+#    #+#             */
-/*   Updated: 2019/11/28 20:58:40 by lucocozz         ###   ########.fr       */
+/*   Updated: 2019/12/05 21:27:51 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*ft_c(va_list ap, t_flags flags)
 	return (str);
 }
 
-char	*ft_s(va_list ap, t_flags flags)
+char	*ft_s(va_list ap, t_flags f)
 {
 	char	*s;
 	char	*str;
@@ -40,14 +40,23 @@ char	*ft_s(va_list ap, t_flags flags)
 	if (s == NULL)
 		s = "(null)";
 	len = ft_strlen(s);
-	if (len < flags.w)
+	if (len < f.w)
 	{
-		str = ft_calloc(flags.w + 1, sizeof(char));
-		ft_strcpy((flags.j ? str : &str[flags.w - len]), s);
-		ft_memset((flags.j ? &str[len] : str), ' ', flags.w - len);
+		str = ft_calloc(f.w + 1, sizeof(char));
+		if (f.j)
+		{
+			ft_strncpy(str, s, (f.is_p ? f.p : len));
+			ft_memset(&str[(f.is_p ? f.p : len)], ' ', f.w -
+			(f.is_p ? f.p : len));
+		}
+		else
+		{
+			ft_memset(str, ' ', f.w - (f.is_p ? f.p : len));
+			ft_strncat(str, s, (f.is_p ? f.p : len));
+		}
 		return (str);
 	}
-	return (ft_strdup(s));
+	return ((f.is_p ? ft_substr(s, 0, f.p) : ft_strdup(s)));
 }
 
 char	*ft_p(va_list ap, t_flags flags)

@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/07 19:37:23 by lucocozz          #+#    #+#             */
-/*   Updated: 2019/11/28 18:10:19 by lucocozz         ###   ########.fr       */
+/*   Updated: 2019/12/05 14:37:18 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,12 @@ char				*ft_strrchr(const char *s, int c);
 char				*ft_strrev(char *str);
 char				*ft_strstr(const char *big, const char *little);
 int					ft_strcmp(const char *s1, const char *s2);
+int					ft_strncmp(const char *s1, const char *s2, size_t n);
 char				*ft_strcat(char *dest, char *src);
+char				*ft_strncat(char *dest, char *src, size_t n);
 char				*ft_strscat(size_t size, ...);
 char				*ft_strcpy(char *dest, char *src);
+char				*ft_strncpy(char *dest, char *src, size_t n);
 int					ft_atoi(const char *str);
 int					ft_atoui(const char *str);
 char				*ft_itoa_base(int value, char *base);
@@ -59,8 +62,8 @@ int					ft_tolower(int c);
 int					ft_isspace(int c);
 char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char				*ft_strjoin(char const *s1, char const *s2);
-char				*ft_strfjoin(char *s1, char const *s2);
 char				*ft_strfjoinp(char *s1, char const *s2, int prefix);
+char				*ft_strfjoin(char *s1, char const *s2);
 char				*ft_strtrim(char const *s1, char const *set);
 char				**ft_split(char const *s, char c);
 char				*ft_itoa(int n);

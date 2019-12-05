@@ -6,14 +6,14 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 16:53:30 by lucocozz          #+#    #+#             */
-/*   Updated: 2019/11/28 21:02:54 by lucocozz         ###   ########.fr       */
+/*   Updated: 2019/12/05 09:00:56 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <stdio.h>
 
-t_types		g_types[TYPESLEN] = {
+t_types g_types[TYPESLEN] = {
 	{'%', &ft_per}, {'c', &ft_c}, {'s', &ft_s},
 	{'p', &ft_p}, {'d', &ft_d}, {'i', &ft_i},
 	{'u', &ft_u}, {'x', &ft_x}, {'X', &ft_xu}
@@ -56,12 +56,8 @@ static char		*ft_get_format(char **pt_arg, va_list ap)
 		i += ft_justify(&arg[i], &flags);
 		i += ft_zero(&arg[i], &flags);
 		i += ft_width(&arg[i], &flags, ap);
-		i += ft_precision(&arg[i], &flags);
-		// if ((int)ft_strclen(TYPES, arg[i]) == -1)
-		// 	i++;
+		i += ft_precision(&arg[i], &flags, ap);
 	}
-	printf("-=%d\n0=%d\nwidth=%d\nprecision=%d\np_value=%d\n",
-	flags.j, flags.z, flags.w, flags.is_p, flags.p);
 	flags.t = arg[i];
 	*pt_arg = &arg[i + 1];
 	return (ft_get_flags(flags, ap));
