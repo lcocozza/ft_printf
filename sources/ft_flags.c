@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 18:30:28 by lucocozz          #+#    #+#             */
-/*   Updated: 2019/12/04 18:23:56 by lucocozz         ###   ########.fr       */
+/*   Updated: 2019/12/09 01:08:14 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	ft_justify(char *s, t_flags *flags)
 
 int	ft_zero(char *s, t_flags *flags)
 {
-	if (s[0] == '0' && (flags->j || flags->is_p))
+	if (s[0] == '0' && (flags->j || flags->hp))
 		flags->z = 1;
 	else
 		flags->z = 0;
@@ -57,7 +57,7 @@ int	ft_precision(char *s, t_flags *flags, va_list ap)
 	{
 		i++;
 		flags->z = 0;
-		flags->is_p = 1;
+		flags->hp = 1;
 		if (s[i] == '*')
 		{
 			flags->p = va_arg(ap, int);
@@ -69,6 +69,6 @@ int	ft_precision(char *s, t_flags *flags, va_list ap)
 			i++;
 	}
 	else
-		flags->is_p = 0;
+		flags->hp = 0;
 	return (i);
 }

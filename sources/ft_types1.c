@@ -6,11 +6,12 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 02:54:12 by lucocozz          #+#    #+#             */
-/*   Updated: 2019/12/05 21:27:51 by lucocozz         ###   ########.fr       */
+/*   Updated: 2019/12/09 02:24:14 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <stdio.h>
 
 char	*ft_c(va_list ap, t_flags flags)
 {
@@ -40,46 +41,42 @@ char	*ft_s(va_list ap, t_flags f)
 	if (s == NULL)
 		s = "(null)";
 	len = ft_strlen(s);
-	if (len < f.w)
+	if (f.f)
 	{
-		str = ft_calloc(f.w + 1, sizeof(char));
-		if (f.j)
-		{
-			ft_strncpy(str, s, (f.is_p ? f.p : len));
-			ft_memset(&str[(f.is_p ? f.p : len)], ' ', f.w -
-			(f.is_p ? f.p : len));
-		}
-		else
-		{
-			ft_memset(str, ' ', f.w - (f.is_p ? f.p : len));
-			ft_strncat(str, s, (f.is_p ? f.p : len));
-		}
+		str = ft_calloc((f.w && f.w > len ? f.w : len) + 1, sizeof(char));
+		ft_memset(str, ' ', (f.w && f.w > len ? f.w : len));
+		if (f.j || (!f.j && !f.w) || (f.w < f.p))
+			ft_memcpy(str, s, (f.hp ? f.p : len));
+		// else
+			// ft_memcpy(&str[f.w - (f.hp ? f.p : len)], s, (f.hp ? f.p : len));
+		str[(f.w && f.w > len ? f.w : len) + 1] = '\0';
 		return (str);
 	}
-	return ((f.is_p ? ft_substr(s, 0, f.p) : ft_strdup(s)));
+	return (ft_strdup(s));
 }
 
 char	*ft_p(va_list ap, t_flags flags)
 {
-	char	*addr;
+	// char	*addr;
 	char	*hex;
 	void	*pt;
-	int		len;
+	// int		len;
 
+	flags = flags;
 	pt = va_arg(ap, void*);
 	if (pt == NULL)
 		hex = ft_strdup("0x0");
-	else
-		hex = ft_strfjoinp(ft_ltoa_base((long)pt, "0123456789abcdef"), "0x", 1);
-	len = ft_strlen(hex);
-	if (len < flags.w)
-	{
-		addr = ft_calloc(flags.w + 1, sizeof(char));
-		ft_strcpy((flags.j ? addr : &addr[flags.w - len]), hex);
-		ft_memset((flags.j ? &addr[len] : addr), ' ', flags.w - len);
-		free(hex);
-		return (addr);
-	}
+	// else
+	// 	hex = ft_strfjoinp(ft_ltoa_base((long)pt, "0123456789abcdef"), "0x", 1);
+	// len = ft_strlen(hex);
+	// if (len < flags.w)
+	// {
+	// 	addr = ft_calloc(flags.w + 1, sizeof(char));
+	// 	ft_strcpy((flags.j ? addr : &addr[flags.w - len]), hex);
+	// 	ft_memset((flags.j ? &addr[len] : addr), ' ', flags.w - len);
+	// 	free(hex);
+	// 	return (addr);
+	// }
 	return (hex);
 }
 

@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 16:53:30 by lucocozz          #+#    #+#             */
-/*   Updated: 2019/12/05 09:00:56 by lucocozz         ###   ########.fr       */
+/*   Updated: 2019/12/09 01:21:32 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ static t_flags	ft_init_flags(void)
 	flags.w = 0;
 	flags.p = 0;
 	flags.t = 0;
-	flags.is_p = 0;
+	flags.f = 0;
+	flags.hp = 0;
 	return (flags);
 }
 
@@ -58,6 +59,7 @@ static char		*ft_get_format(char **pt_arg, va_list ap)
 		i += ft_width(&arg[i], &flags, ap);
 		i += ft_precision(&arg[i], &flags, ap);
 	}
+	flags.f = (arg[i - 1] != '%' ? 1 : 0);
 	flags.t = arg[i];
 	*pt_arg = &arg[i + 1];
 	return (ft_get_flags(flags, ap));
@@ -66,6 +68,7 @@ static char		*ft_get_format(char **pt_arg, va_list ap)
 int				ft_printf(const char *format, ...)
 {
 	t_format	tmp;
+	char		*to_free;
 
 	tmp.buff = NULL;
 	va_start(tmp.ap, format);
@@ -78,7 +81,9 @@ int				ft_printf(const char *format, ...)
 		else
 			tmp.buff = ft_subfstr(tmp.buff, 0, ft_strclen(tmp.buff, '%'));
 		tmp.param = ft_get_format(&tmp.arg, tmp.ap);
-		tmp.buff = ft_strscat(3, tmp.buff, tmp.param, tmp.arg);
+		to_free = tmp.buff;
+		tmp.buff = ft_strscat(3, to_free, tmp.param, tmp.arg);
+		free(to_free);
 		ft_strdel(tmp.param);
 	}
 	va_end(tmp.ap);
