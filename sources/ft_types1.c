@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 02:54:12 by lucocozz          #+#    #+#             */
-/*   Updated: 2019/12/09 02:24:14 by lucocozz         ###   ########.fr       */
+/*   Updated: 2019/12/15 06:58:25 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,21 @@
 
 char	*ft_c(va_list ap, t_flags flags)
 {
+	char	c;
 	char	*str;
 
-	str = ft_calloc(flags.w, sizeof(char));
-	if (flags.j)
+	c = (char)va_arg(ap, int);
+	if (c)
 	{
-		str[0] = (char)va_arg(ap, int);
-		ft_memset(&str[1], ' ', flags.w - 1);
+		str = ft_calloc(flags.w, sizeof(char));
+		ft_memset(str, ' ', flags.w);
+		if (flags.j)
+			str[0] = c;
+		else
+			str[(flags.w ? flags.w - 1 : 0)] = c;
+		return (str);
 	}
-	else
-	{
-		ft_memset(str, ' ', flags.w - 1);
-		str[flags.w - 1] = (char)va_arg(ap, int);
-	}
-	return (str);
+	return (ft_strdup(""));
 }
 
 char	*ft_s(va_list ap, t_flags f)
@@ -38,45 +39,48 @@ char	*ft_s(va_list ap, t_flags f)
 	int		len;
 
 	s = va_arg(ap, char*);
+	if (s[0] == '\0' || (!f.w && !f.p && f.hp))
+		return (NULL);
 	if (s == NULL)
 		s = "(null)";
 	len = ft_strlen(s);
-	if (f.f)
-	{
-		str = ft_calloc((f.w && f.w > len ? f.w : len) + 1, sizeof(char));
-		ft_memset(str, ' ', (f.w && f.w > len ? f.w : len));
-		if (f.j || (!f.j && !f.w) || (f.w < f.p))
-			ft_memcpy(str, s, (f.hp ? f.p : len));
-		// else
-			// ft_memcpy(&str[f.w - (f.hp ? f.p : len)], s, (f.hp ? f.p : len));
-		str[(f.w && f.w > len ? f.w : len) + 1] = '\0';
-		return (str);
-	}
-	return (ft_strdup(s));
+	if (f.p < 0)
+		f.hp = 0;
+	else if (f.hp && f.p >= len)
+		f.hp = 0;
+	else if (f.hp)
+		len = f.p;
+	if (f.w <= len)
+		f.w = 0;
+	else
+		f.w -= len;
+	str = ft_calloc(f.w + len, sizeof(char));
+	ft_memset(str, ' ', f.w + len);
+	ft_memcpy((f.j ? str : &str[f.w]), s, len);
+	return (str);
 }
 
 char	*ft_p(va_list ap, t_flags flags)
 {
-	// char	*addr;
+	char	*addr;
 	char	*hex;
 	void	*pt;
-	// int		len;
+	int		len;
 
-	flags = flags;
 	pt = va_arg(ap, void*);
 	if (pt == NULL)
 		hex = ft_strdup("0x0");
-	// else
-	// 	hex = ft_strfjoinp(ft_ltoa_base((long)pt, "0123456789abcdef"), "0x", 1);
-	// len = ft_strlen(hex);
-	// if (len < flags.w)
-	// {
-	// 	addr = ft_calloc(flags.w + 1, sizeof(char));
-	// 	ft_strcpy((flags.j ? addr : &addr[flags.w - len]), hex);
-	// 	ft_memset((flags.j ? &addr[len] : addr), ' ', flags.w - len);
-	// 	free(hex);
-	// 	return (addr);
-	// }
+	else
+		hex = ft_strfjoinp(ft_ltoa_base((long)pt, "0123456789abcdef"), "0x", 1);
+	len = ft_strlen(hex);
+	if (len < flags.w)
+	{
+		addr = ft_calloc(flags.w + 1, sizeof(char));
+		ft_strcpy((flags.j ? addr : &addr[flags.w - len]), hex);
+		ft_memset((flags.j ? &addr[len] : addr), ' ', flags.w - len);
+		free(hex);
+		return (addr);
+	}
 	return (hex);
 }
 

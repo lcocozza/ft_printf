@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 17:33:12 by lucocozz          #+#    #+#             */
-/*   Updated: 2019/12/08 23:45:32 by lucocozz         ###   ########.fr       */
+/*   Updated: 2019/12/15 06:53:45 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ typedef struct	s_flags
 	int			w;
 	int			p;
 	int			hp;
-	int			f;
 	char		t;
 }				t_flags;
 
