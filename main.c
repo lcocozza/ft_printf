@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 17:39:40 by lucocozz          #+#    #+#             */
-/*   Updated: 2019/12/26 14:19:59 by lucocozz         ###   ########.fr       */
+/*   Updated: 2019/12/29 17:51:38 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,23 @@ int	main()
 	char	*mem = ft_strdup("suce pute");
 	int		len;
 	
-	len = ft_printf("%.4d", 42);
+	len = 0;
+	len = ft_printf("%.2d", 42);
 	printf("|\n");
 	printf("len=%d\n", len);
-	len = printf("%.4d", 42);
+	len = printf("%-2.4d", 42);
 	printf("|\n");
 	printf("len=%d\n", len);
 	free(mem);
 	return (0);
 }
+
+/*
+"%.0d, 0" = rien
+"%05d, 42"  = 00042
+"%.5d, 42"  = 00042
+"%05d, -42" = -0042
+"%.5d, -42" = -00042
+"%010.5d, 42"  = "%10.5d, 42"  = "     00042"
+"%010.5d, -42" = "%10.5d, -42" = "    -00042"
+*/
