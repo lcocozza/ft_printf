@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/07 19:37:23 by lucocozz          #+#    #+#             */
-/*   Updated: 2019/12/05 14:37:18 by lucocozz         ###   ########.fr       */
+/*   Updated: 2019/12/16 06:15:23 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ void				ft_putstr(char const *s);
 int					ft_lputstr(char const *s);
 void				ft_putnbr(int n);
 void				*ft_calloc(size_t count, size_t size);
+void				*ft_allocc(size_t count, size_t size, int c);
 void				*ft_realloc(void *ptr, size_t size);
 char				*ft_srealloc(char *str, size_t size);
 char				*ft_substr(char const *s, unsigned int start, size_t len);

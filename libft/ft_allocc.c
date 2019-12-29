@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_allocc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/27 17:39:40 by lucocozz          #+#    #+#             */
-/*   Updated: 2019/12/26 14:19:59 by lucocozz         ###   ########.fr       */
+/*   Created: 2019/10/08 16:04:32 by lucocozz          #+#    #+#             */
+/*   Updated: 2019/12/16 06:17:28 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-#include <stdio.h>
+#include "libft.h"
 
-int	main()
+void	*ft_allocc(size_t count, size_t size, int c)
 {
-	char	*mem = ft_strdup("suce pute");
-	int		len;
+	int		t_size;
+	void	*tmp;
 	
-	len = ft_printf("%.4d", 42);
-	printf("|\n");
-	printf("len=%d\n", len);
-	len = printf("%.4d", 42);
-	printf("|\n");
-	printf("len=%d\n", len);
-	free(mem);
-	return (0);
+	t_size = count * size;
+	if ((tmp = malloc(t_size)) == NULL)
+		return (NULL);
+	ft_bzero(tmp, t_size);
+	ft_memset(tmp, c, t_size - 1);
+	return (tmp);
 }
