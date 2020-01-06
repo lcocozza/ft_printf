@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/07 19:37:23 by lucocozz          #+#    #+#             */
-/*   Updated: 2019/12/16 06:15:23 by lucocozz         ###   ########.fr       */
+/*   Updated: 2020/01/06 15:13:37 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,5 +81,6 @@ char				*ft_substr(char const *s, unsigned int start, size_t len);
 char				*ft_subfstr(char *s, unsigned int start, size_t len);
 int					ft_count_word(const char *str);
 int					get_next_line(int fd, char **line);
+char				*ft_strupper(char *s);
 
 #endif

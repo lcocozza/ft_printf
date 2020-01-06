@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 17:33:12 by lucocozz          #+#    #+#             */
-/*   Updated: 2019/12/15 06:53:45 by lucocozz         ###   ########.fr       */
+/*   Updated: 2020/01/06 15:24:23 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,13 @@
 
 # include "libft.h"
 # include <stdarg.h>
+# include <stdio.h>
 
 # define TYPES "cspdiuxX%"
 # define FLAGS	"-0.*"
 # define TYPESLEN 9
+# define UNSIGN(x)	(x < 0 ? 0 : x)
+# define ABS(x)		(x < 0 ? x * -1 : x)
 
 typedef struct	s_types
 {
@@ -61,6 +64,8 @@ int				ft_zero(char *s, t_flags *flags);
 int				ft_justify(char *s, t_flags *flags);
 int				ft_width(char *s, t_flags *flags, va_list ap);
 int				ft_precision(char *s, t_flags *flags, va_list ap);
+char			*ft_set_p(char *nb, int p);
+
 
 											
 #endif

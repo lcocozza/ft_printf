@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 18:30:28 by lucocozz          #+#    #+#             */
-/*   Updated: 2019/12/16 06:00:35 by lucocozz         ###   ########.fr       */
+/*   Updated: 2020/01/06 14:50:09 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,11 @@ int	ft_width(char *s, t_flags *flags, va_list ap)
 	if (s[0] == '*')
 	{
 		flags->w = va_arg(ap, int);
+		if (flags->w < 0)
+		{
+			flags->w = ABS(flags->w);
+			ft_justify("-", flags);
+		}
 		i++;
 	}
 	else
@@ -60,6 +65,8 @@ int	ft_precision(char *s, t_flags *flags, va_list ap)
 		if (s[i] == '*')
 		{
 			flags->p = va_arg(ap, int);
+			if (flags->p < 0)
+				flags->hp = 0;
 			i++;
 		}
 		else
