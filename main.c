@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 17:39:40 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/01/18 02:39:09 by lucocozz         ###   ########.fr       */
+/*   Updated: 2020/01/30 10:52:21 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 
 int	main()
 {
-	char	*mem = ft_strdup("%%");
+//	char	*mem = ft_strdup("%%");
 	int		len;
 	
 	len = 0;
-	len = ft_printf("%*s|\n", -4, mem);
+	len = ft_printf("%s\n", "%%");
 	printf("len=%d\n", len);
-	len = printf("%*s|\n", -4, mem);
+	len = printf("%s\n", "%%");
 	printf("len=%d\n", len);
-	free(mem);
+	// free(mem);
 	return (0);
 }

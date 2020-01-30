@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 17:33:12 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/01/18 01:37:31 by lucocozz         ###   ########.fr       */
+/*   Updated: 2020/01/30 09:37:44 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,6 @@ int				ft_precision(char *s, t_flags *flags, va_list ap);
 char			*ft_set_p(char *nb, t_flags f);
 char			*ft_format_nb(t_flags f, char *nb);
 char			*ft_setchar_decfw(char *str, int *i, t_flags *f, char c);
-
-
-
 
 											
 #endif
