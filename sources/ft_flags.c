@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 18:30:28 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/01/06 14:50:09 by lucocozz         ###   ########.fr       */
+/*   Updated: 2020/01/18 03:25:04 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	ft_justify(char *s, t_flags *flags)
 
 int	ft_zero(char *s, t_flags *flags)
 {
-	if (s[0] == '0' && !flags->j)
+	if (s[0] == '0' && (!flags->j || !flags->hp))
 		flags->z = 1;
 	else
 		flags->z = 0;
@@ -46,7 +46,7 @@ int	ft_width(char *s, t_flags *flags, va_list ap)
 	}
 	else
 	{
-		flags->w = ft_atoui(s);
+		flags->w = ABS(ft_atoi(s));
 		while (ft_isdigit(s[i]))
 			i++;
 	}
@@ -56,17 +56,20 @@ int	ft_width(char *s, t_flags *flags, va_list ap)
 int	ft_precision(char *s, t_flags *flags, va_list ap)
 {
 	int	i;
+	int	z;
 
 	i = 0;
+	z = flags->z;
 	if (s[i] == '.')
 	{
 		i++;
 		flags->hp = 1;
+		flags->z = 0;
 		if (s[i] == '*')
 		{
 			flags->p = va_arg(ap, int);
-			if (flags->p < 0)
-				flags->hp = 0;
+			if (flags->p < 0 && z)
+				flags->z = 1;
 			i++;
 		}
 		else

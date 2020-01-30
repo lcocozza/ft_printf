@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 17:33:12 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/01/06 15:24:23 by lucocozz         ###   ########.fr       */
+/*   Updated: 2020/01/18 01:37:31 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,11 @@ int				ft_zero(char *s, t_flags *flags);
 int				ft_justify(char *s, t_flags *flags);
 int				ft_width(char *s, t_flags *flags, va_list ap);
 int				ft_precision(char *s, t_flags *flags, va_list ap);
-char			*ft_set_p(char *nb, int p);
+char			*ft_set_p(char *nb, t_flags f);
+char			*ft_format_nb(t_flags f, char *nb);
+char			*ft_setchar_decfw(char *str, int *i, t_flags *f, char c);
+
+
 
 
 											

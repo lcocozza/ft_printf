@@ -6,12 +6,11 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 16:53:30 by lucocozz          #+#    #+#             */
-/*   Updated: 2019/12/15 06:53:38 by lucocozz         ###   ########.fr       */
+/*   Updated: 2020/01/08 18:50:30 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
 
 t_types g_types[TYPESLEN] = {
 	{'%', &ft_per}, {'c', &ft_c}, {'s', &ft_s},
@@ -46,7 +45,7 @@ static char		*ft_make_buff(char *buff, char *arg, char *next, int *len)
 {
 	char		*new_buff;
 
-	if (arg == NULL || arg[0] == '\0')
+	if (arg == NULL)
 	{
 		new_buff = ft_strscat(2, buff, next);
 		if (arg != NULL)

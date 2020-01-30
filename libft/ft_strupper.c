@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 15:09:40 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/01/06 15:17:36 by lucocozz         ###   ########.fr       */
+/*   Updated: 2020/01/06 16:19:17 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,10 @@ char	*ft_strupper(char *s)
 	int	i;
 
 	i = 0;
-	while (s[i++])
+	while (s[i])
+	{
 		s[i] = ft_toupper(s[i]);
+		i++;
+	}
 	return (s);
 }

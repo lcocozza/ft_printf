@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 02:59:52 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/01/06 15:35:39 by lucocozz         ###   ########.fr       */
+/*   Updated: 2020/01/08 18:09:58 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,53 +15,23 @@
 char	*ft_u(va_list ap, t_flags f)
 {
 	int		n;
-	int		len;
 	char	*nb;
-	char	*str;
 
 	n = va_arg(ap, int);
 	nb = ft_uitoa(n);
-	len = ft_strlen(nb);
-	if (f.hp && f.p <= len)
-		f.hp = 0;
-	else if (f.hp)
-		len = f.p;
-	nb = ft_set_p(nb, f.p);
-	len = ft_strlen(nb);
-	f.w = (f.w <= len ? 0 : f.w - len);
-	str = ft_allocc(f.w + len + 1, sizeof(char), (f.z ? '0' : ' '));
-	if (f.j)
-		ft_memcpy(str, nb, len);
-	else
-		ft_memcpy(&str[f.w], nb, len);
-	ft_strdel(nb);
-	return (str);
+	nb = ft_format_nb(f, nb);
+	return (nb);
 }
 
 char	*ft_x(va_list ap, t_flags f)
 {
 	int		n;
-	int		len;
 	char	*nb;
-	char	*str;
 
 	n = va_arg(ap, int);
 	nb = ft_uitoa_base(n, "0123456789abcdef");
-	len = ft_strlen(nb);
-	if (f.hp && f.p <= len)
-		f.hp = 0;
-	else if (f.hp)
-		len = f.p;
-	nb = ft_set_p(nb, f.p);
-	len = ft_strlen(nb);
-	f.w = (f.w <= len ? 0 : f.w - len);
-	str = ft_allocc(f.w + len + 1, sizeof(char), (f.z ? '0' : ' '));
-	if (f.j)
-		ft_memcpy(str, nb, len);
-	else
-		ft_memcpy(&str[f.w], nb, len);
-	ft_strdel(nb);
-	return (str);
+	nb = ft_format_nb(f, nb);
+	return (nb);
 }
 
 char	*ft_xu(va_list ap, t_flags f)
