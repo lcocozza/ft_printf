@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 20:46:15 by lucocozz          #+#    #+#             */
-/*   Updated: 2019/11/27 17:44:38 by lucocozz         ###   ########.fr       */
+/*   Updated: 2020/02/03 21:28:01 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@ char		*ft_uitoa(unsigned int n)
 	unsigned int	i;
 	char			*strnew;
 
+	if (n == 0)
+		return (ft_strdup("0"));
 	i = ft_nbrlen(n, 10);
 	if ((strnew = ft_calloc(i + 1, sizeof(char))) == NULL)
 		return (NULL);
 	strnew[i--] = '\0';
-	if (n == 0)
-		return (ft_strdup("0"));
 	while (n > 0)
 	{
 		strnew[i] = (n % 10) + '0';

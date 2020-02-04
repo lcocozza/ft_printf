@@ -1,113 +1,76 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_types_csp.c                                     :+:      :+:    :+:   */
+/*   ft_types_cs.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 02:54:12 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/01/28 11:40:43 by lucocozz         ###   ########.fr       */
+/*   Updated: 2020/02/04 17:08:38 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	*ft_c(va_list ap, t_flags f)
+void	ft_c(va_list ap, t_parse data, t_buffer *buffer)
 {
-	int		i;
 	char	c;
-	char	*str;
 
-	i = 0;
 	c = (char)va_arg(ap, int);
-	if (c)
+	if (data.padding)
 	{
-		str = ft_calloc(f.w + 2, sizeof(char));
-		if (f.j)
-		{
-			str = ft_setchar_decfw(str, &i, &f, c);
-			while (f.w > 0)
-				str = ft_setchar_decfw(str, &i, &f, ' ');
-		}
-		else
-		{
-			while (f.w > 0)
-				str = ft_setchar_decfw(str, &i, &f, (f.z ? '0' : ' '));
-			str = ft_setchar_decfw(str, &i, &f, c);
-		}
-		return (str);
+		ft_insert_format(buffer, &data, c);
+		while (data.width > 0)
+			ft_insert_format(buffer, &data, ' ');
 	}
-	return (NULL);
+	else
+	{
+		while (data.width > 1)
+			ft_insert_format(buffer, &data, data.fill);
+		ft_insert_format(buffer, &data, c);
+	}
 }
 
-static char	*ft_rigth_padding(char *buff, t_flags f, char *str)
+static void	ft_rigth_padding(t_parse data, t_buffer *buffer, char *str)
 {
 	int	i;
 
 	i = 0;
-	if (!f.hp)
-		while (*str)
-		{
-			buff[i++] = *str;
-			str++;
-			f.w--;
-		}
+	if (data.precision == -1)
+		while (str[i])
+			ft_insert_format(buffer, &data, str[i++]);
 	else
-		while (*str && f.p > 0)
-		{
-			buff[i++] = *str;
-			str++;
-			f.w--;
-		}
-	while (f.w > 0)
-	{
-		buff[i++] = ' ';
-		f.w--;
-	}
-	return (buff);
+		while (str[i] && data.precision-- > 0)
+			ft_insert_format(buffer, &data, str[i++]);
+	while (data.width > 0)
+		ft_insert_format(buffer, &data, ' ');
 }
 
-static char	*ft_left_padding(char *buff, t_flags f, char *str)
+static void	ft_left_padding(t_parse data, t_buffer *buffer, char *str)
 {
 	int	i;
 	int	len;
 
 	i = 0;
-	if (!f.hp)
-		len = ft_strlen(str);
+	len = ft_strlen(str);
+	if (data.precision == -1)
+		len = len;
 	else
-		len = ((int)ft_strlen(str) < f.p ? (int)ft_strlen(str) : f.p);
-	while (f.w > len)
-	{
-		buff[i++] = (f.z ? '0' : ' ');
-		f.w--;
-	}
-	while (len > 0)
-	{
-		buff[i++] = *str;
-		str++;
-		len--;
-	}
-	return (buff);
+		len = (len < data.precision ? len : data.precision);
+	while (data.width > len)
+		ft_insert_format(buffer, &data, data.fill);
+	while (len-- > 0)
+		ft_insert_in_buffer(buffer, str[i++]);
 }
 
-char	*ft_s(va_list ap, t_flags f)
+void	ft_s(va_list ap, t_parse data, t_buffer *buffer)
 {
-	char	*s;
 	char	*str;
-	int		len;
 
-	s = va_arg(ap, char*);
-	len = ft_strlen(s);
-	if (f.p < 0)
-		f.p = len;
-	if (s[0] == '\0' || (!f.w && !f.p && f.hp))
-		return (NULL);
-	s = (!s ? "(null)" : s);
-	str = ft_calloc(f.w + f.p + len + 1, sizeof(char));
-	if (f.j)
-		str = ft_rigth_padding(str, f, s);
+	str = va_arg(ap, char*);
+	str = (!str ? "(null)" : str);
+	if (data.padding)
+		ft_rigth_padding(data, buffer, str);
 	else
-		str = ft_left_padding(str, f, s);
-	return (str);
+		ft_left_padding(data, buffer, str);
 }

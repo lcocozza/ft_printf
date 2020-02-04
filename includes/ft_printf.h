@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 17:33:12 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/01/30 09:37:44 by lucocozz         ###   ########.fr       */
+/*   Updated: 2020/02/03 17:29:28 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,57 +16,52 @@
 # include "libft.h"
 # include <stdarg.h>
 # include <stdio.h>
+# include <stdint.h>
 
 # define TYPES "cspdiuxX%"
-# define FLAGS	"-0.*"
-# define TYPESLEN 9
-# define UNSIGN(x)	(x < 0 ? 0 : x)
-# define ABS(x)		(x < 0 ? x * -1 : x)
+# define N_TYPES 9
+# define PRINTF_BUFFER_SIZE 4096
 
 typedef struct	s_types
 {
 	char		name;
-	char		*(*f)();
+	void		(*function)();
 }				t_types;
 
-typedef struct	s_flags
+typedef struct	s_parse
 {
-	int			j;
-	int			z;
-	int			w;
-	int			p;
-	int			hp;
-	char		t;
-}				t_flags;
+	int			padding;
+	int			width;
+	int			precision;
+	char		fill;
+	char		type;
+}				t_parse;
 
-typedef struct	s_format
+typedef struct	s_buffer
 {
 	int			i;
 	int			len;
-	char		*arg;
-	char		*param;
-	char		*buff;
-	va_list		ap;
-}				t_format;
-
+	char		data[PRINTF_BUFFER_SIZE];
+}				t_buffer;
 
 int				ft_printf(const char *format, ...);
-char			*ft_c(va_list ap, t_flags flags);
-char			*ft_s(va_list ap, t_flags flags);
-char			*ft_p(va_list ap, t_flags flags);
-char			*ft_d(va_list ap, t_flags flags);
-char			*ft_i(va_list ap, t_flags flags);
-char			*ft_u(va_list ap, t_flags flags);
-char			*ft_x(va_list ap, t_flags flags);
-char			*ft_xu(va_list ap, t_flags flags);
-char			*ft_per(va_list ap, t_flags flags);
-int				ft_zero(char *s, t_flags *flags);
-int				ft_justify(char *s, t_flags *flags);
-int				ft_width(char *s, t_flags *flags, va_list ap);
-int				ft_precision(char *s, t_flags *flags, va_list ap);
-char			*ft_set_p(char *nb, t_flags f);
-char			*ft_format_nb(t_flags f, char *nb);
-char			*ft_setchar_decfw(char *str, int *i, t_flags *f, char c);
+t_parse			ft_init_parse(void);
+void			ft_print_buffer(t_buffer *buffer);
+void			ft_insert_in_buffer(t_buffer *buffer, char c);
+void			ft_insert_str(t_buffer *buffer, t_parse *data, char *str);
+void			ft_insert_format(t_buffer *buffer, t_parse *data, char c);
+void			ft_c(va_list ap, t_parse data, t_buffer *buffer);
+void			ft_s(va_list ap, t_parse data, t_buffer *buffer);
+void			ft_p(va_list ap, t_parse data, t_buffer *buffer);
+void			ft_d(va_list ap, t_parse data, t_buffer *buffer);
+void			ft_i(va_list ap, t_parse data, t_buffer *buffer);
+void			ft_u(va_list ap, t_parse data, t_buffer *buffer);
+void			ft_x(va_list ap, t_parse data, t_buffer *buffer);
+void			ft_xu(va_list ap, t_parse data, t_buffer *buffer);
+void			ft_per(va_list ap, t_parse data, t_buffer *buffer);
+int				ft_parse_padding(char c, t_parse *data);
+int				ft_parse_fill(char c, t_parse *data);
+int				ft_parse_width(const char *s, t_parse *data, va_list ap);
+int				ft_parse_precision(const char *s, t_parse *data, va_list ap);
 
-											
 #endif

@@ -2,8 +2,9 @@
 
 NAME= libftprintf.a
 
-SRCS_FILE=	ft_printf.c			ft_types_cs.c			ft_types_uxX%.c		\
-			ft_flags.c			ft_types_di.c			ft_type_p.c
+SRCS_FILE=	ft_printf.c			ft_printf_utils.c		ft_parsing.c	\
+			ft_types_cs.c		ft_types_xX.c			ft_type_di.c	\
+			ft_type_p.c			ft_types_u%.c
 
 LIBFT_FILE=	ft_memset.c			ft_bzero.c			ft_memcpy.c		\
 			ft_memccpy.c	 	ft_memmove.c 		ft_memchr.c		\

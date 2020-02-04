@@ -6,99 +6,63 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 16:53:30 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/01/30 15:25:47 by lucocozz         ###   ########.fr       */
+/*   Updated: 2020/02/04 14:05:42 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-t_types g_types[TYPESLEN] = {
+t_types 		g_types[N_TYPES] = {
 	{'%', &ft_per}, {'c', &ft_c}, {'s', &ft_s},
 	{'p', &ft_p}, {'d', &ft_d}, {'i', &ft_i},
 	{'u', &ft_u}, {'x', &ft_x}, {'X', &ft_xu}
 };
 
-static t_flags	ft_init_flags(void)
+static void		ft_format_buffer(t_parse data, t_buffer *buffer, va_list ap)
 {
-	t_flags	flags;
-
-	flags.j = 0;
-	flags.z = 0;
-	flags.w = 0;
-	flags.p = 0;
-	flags.t = 0;
-	flags.hp = 0;
-	return (flags);
-}
-
-static char		*ft_get_flags(t_flags flags, va_list ap)
-{
-	int i;
+	int	i;
 
 	i = 0;
-	while (i <= TYPESLEN && flags.t != g_types[i].name)
+	while (i <= N_TYPES && data.type != g_types[i].name)
 		i++;
-	return (g_types[i].f(ap, flags));
+	g_types[i].function(ap, data, buffer);
 }
 
-static char		*ft_make_buff(char *buff, char *arg, char *next, int *len)
+static t_parse	ft_parsing(const char *format, int *i, va_list ap)
 {
-	char		*new_buff;
+	t_parse	data;
 
-	if (arg == NULL)
+	data = ft_init_parse();
+	*i += 1;
+	while (!ft_strchr(TYPES, format[*i]) && format[*i])
 	{
-		new_buff = ft_strscat(2, buff, next);
-		if (arg != NULL)
-			*len += 1;
-	}
-	else
-		new_buff = ft_strscat(3, buff, arg, next);
-	ft_strdel(arg);
-	ft_strdel(buff);
-	return (new_buff);
-}
-
-static char		*ft_get_format(char **pt_arg, va_list ap)
-{
-	int			i;
-	char		*arg;
-	t_flags		flags;
-
-	i = 0;
-	arg = *pt_arg;
-	flags = ft_init_flags();
-	while (ft_strchr(TYPES, arg[i]) == NULL && arg[i])
-	{
-		i += ft_justify(&arg[i], &flags);
-		i += ft_zero(&arg[i], &flags);
-		i += ft_width(&arg[i], &flags, ap);
-		i += ft_precision(&arg[i], &flags, ap);
-	}
-	flags.t = arg[i];
-	*pt_arg = &arg[i + 1];
-	return (ft_get_flags(flags, ap));
+		*i += ft_parse_padding(format[*i], &data);
+		*i += ft_parse_fill(format[*i], &data);
+		*i += ft_parse_width(&format[*i], &data, ap);
+		*i += ft_parse_precision(&format[*i], &data, ap);
+	}	
+	data.type = format[*i];
+	*i += 1;
+	return (data);
 }
 
 int				ft_printf(const char *format, ...)
 {
-	t_format	tmp;
+	int			i;
+	t_buffer	buffer;
+	va_list		ap;
 
-	tmp.len = 0;
-	tmp.buff = NULL;
-	va_start(tmp.ap, format);
-	tmp.arg = (char *)format;
-	while ((tmp.i = ft_strclen(tmp.arg, '%')) != -1)
+	i = 0;
+	buffer.i = 0;
+	buffer.len = 0;
+	va_start(ap, format);
+	while (format[i])
 	{
-		tmp.arg = &tmp.arg[tmp.i + 1];
-		if (!tmp.buff)
-			tmp.buff = ft_substr(format, 0, tmp.i);
+		if (format[i] == '%')
+			ft_format_buffer(ft_parsing(format, &i, ap), &buffer, ap);
 		else
-			tmp.buff = ft_subfstr(tmp.buff, 0, ft_strclen(tmp.buff, '%'));
-		tmp.param = ft_get_format(&tmp.arg, tmp.ap);
-		tmp.buff = ft_make_buff(tmp.buff, tmp.param, tmp.arg, &tmp.len);
+			ft_insert_in_buffer(&buffer, format[i++]);
 	}
-	va_end(tmp.ap);
-	tmp.len += ft_lputstr((tmp.buff ? tmp.buff : format));
-	ft_strdel(tmp.buff);
-	return (tmp.len);
+	ft_print_buffer(&buffer);
+	return (buffer.len);
 }

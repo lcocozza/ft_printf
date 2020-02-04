@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 15:13:33 by lucocozz          #+#    #+#             */
-/*   Updated: 2019/10/10 23:18:19 by lucocozz         ###   ########.fr       */
+/*   Updated: 2020/02/04 14:15:22 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,14 @@ char		*ft_itoa(int n)
 	int		i;
 	char	*strnew;
 
-	i = ft_number_len(n);
-	if ((strnew = ft_calloc(i + 1, sizeof(char))) == NULL)
-		return (NULL);
-	strnew[i--] = '\0';
 	if (n == 0)
 		return (ft_strdup("0"));
 	if (n == -2147483648)
 		return (ft_strdup("-2147483648"));
+	i = ft_number_len(n);
+	if ((strnew = ft_calloc(i + 1, sizeof(char))) == NULL)
+		return (NULL);
+	strnew[i--] = '\0';
 	if (n < 0)
 	{
 		strnew[0] = '-';
