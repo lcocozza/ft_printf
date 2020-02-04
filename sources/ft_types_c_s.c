@@ -6,13 +6,13 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 02:54:12 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/02/04 17:08:38 by lucocozz         ###   ########.fr       */
+/*   Updated: 2020/02/04 17:27:24 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_c(va_list ap, t_parse data, t_buffer *buffer)
+void		ft_c(va_list ap, t_parse data, t_buffer *buffer)
 {
 	char	c;
 
@@ -50,20 +50,21 @@ static void	ft_left_padding(t_parse data, t_buffer *buffer, char *str)
 {
 	int	i;
 	int	len;
+	int	t_len;
 
 	i = 0;
-	len = ft_strlen(str);
+	t_len = ft_strlen(str);
 	if (data.precision == -1)
-		len = len;
+		len = t_len;
 	else
-		len = (len < data.precision ? len : data.precision);
+		len = (t_len < data.precision ? t_len : data.precision);
 	while (data.width > len)
 		ft_insert_format(buffer, &data, data.fill);
 	while (len-- > 0)
 		ft_insert_in_buffer(buffer, str[i++]);
 }
 
-void	ft_s(va_list ap, t_parse data, t_buffer *buffer)
+void		ft_s(va_list ap, t_parse data, t_buffer *buffer)
 {
 	char	*str;
 

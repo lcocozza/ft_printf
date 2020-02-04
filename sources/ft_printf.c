@@ -6,13 +6,13 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 16:53:30 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/02/04 14:05:42 by lucocozz         ###   ########.fr       */
+/*   Updated: 2020/02/04 17:28:47 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-t_types 		g_types[N_TYPES] = {
+t_types		g_types[N_TYPES] = {
 	{'%', &ft_per}, {'c', &ft_c}, {'s', &ft_s},
 	{'p', &ft_p}, {'d', &ft_d}, {'i', &ft_i},
 	{'u', &ft_u}, {'x', &ft_x}, {'X', &ft_xu}
@@ -40,7 +40,7 @@ static t_parse	ft_parsing(const char *format, int *i, va_list ap)
 		*i += ft_parse_fill(format[*i], &data);
 		*i += ft_parse_width(&format[*i], &data, ap);
 		*i += ft_parse_precision(&format[*i], &data, ap);
-	}	
+	}
 	data.type = format[*i];
 	*i += 1;
 	return (data);

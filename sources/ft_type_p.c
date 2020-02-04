@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 11:40:09 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/02/01 10:24:08 by lucocozz         ###   ########.fr       */
+/*   Updated: 2020/02/04 17:49:59 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	ft_rigth_padding(t_parse data, t_buffer *buffer, char *str, int nb)
 {
 	int	len;
 
-	len = ft_strlen(str);
+	len = ft_nbrlen(nb, 16);
 	ft_insert_str(buffer, &data, "0x");
 	while (data.precision > len)
 	{
@@ -33,7 +33,7 @@ static void	ft_left_padding(t_parse data, t_buffer *buffer, char *str, int nb)
 {
 	int	len;
 
-	len = ft_strlen(str);
+	len = ft_nbrlen(nb, 16);
 	while (data.width > len + 2 && data.width > data.precision + 2)
 		ft_insert_format(buffer, &data, data.fill);
 	ft_insert_str(buffer, &data, "0x");
@@ -52,7 +52,10 @@ void		ft_p(va_list ap, t_parse data, t_buffer *buffer)
 	uintptr_t	nb;
 
 	nb = (uintptr_t)va_arg(ap, void*);
-	str = ft_ltoa_base((long)nb, "0123456789abcdef");
+	if (!nb)
+		str = ft_strdup("0");
+	else
+		str = ft_ltoa_base((long)nb, "0123456789abcdef");
 	if (data.padding)
 		ft_rigth_padding(data, buffer, str, nb);
 	else

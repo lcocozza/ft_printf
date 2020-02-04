@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 17:36:30 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/02/03 20:33:20 by lucocozz         ###   ########.fr       */
+/*   Updated: 2020/02/04 17:27:45 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int		ft_parse_precision(const char *s, t_parse *data, va_list ap)
 		else
 			data->fill = ' ';
 		while (ft_isdigit(s[i]))
-			i++;	
+			i++;
 	}
 	return (i);
 }

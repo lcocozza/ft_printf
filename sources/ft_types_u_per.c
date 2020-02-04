@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_types_u%.c                                      :+:      :+:    :+:   */
+/*   ft_types_u_per.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 20:35:00 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/02/04 16:57:00 by lucocozz         ###   ########.fr       */
+/*   Updated: 2020/02/04 17:52:35 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	ft_rigth_padding(t_parse data, t_buffer *buffer, char *str, int nb)
 static void	ft_left_padding(t_parse data, t_buffer *buffer, char *str, int nb)
 {
 	int len;
-	
+
 	len = ft_strlen(str);
 	while (data.width > len && data.width > data.precision)
 		ft_insert_format(buffer, &data, data.fill);
@@ -48,7 +48,7 @@ static void	ft_left_padding(t_parse data, t_buffer *buffer, char *str, int nb)
 		ft_insert_str(buffer, &data, str);
 }
 
-void	ft_u(va_list ap, t_parse data, t_buffer *buffer)
+void		ft_u(va_list ap, t_parse data, t_buffer *buffer)
 {
 	unsigned int	nb;
 	char			*str;
@@ -62,7 +62,7 @@ void	ft_u(va_list ap, t_parse data, t_buffer *buffer)
 	ft_strdel(str);
 }
 
-void	ft_per(va_list ap, t_parse data, t_buffer *buffer)
+void		ft_per(va_list ap, t_parse data, t_buffer *buffer)
 {
 	(void)ap;
 	(void)data;

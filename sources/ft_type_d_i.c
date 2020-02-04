@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_types_xX.c                                      :+:      :+:    :+:   */
+/*   ft_type_di.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/21 02:59:52 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/02/04 16:55:52 by lucocozz         ###   ########.fr       */
+/*   Created: 2020/01/31 16:38:12 by lucocozz          #+#    #+#             */
+/*   Updated: 2020/02/04 17:37:56 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@ static void	ft_rigth_padding(t_parse data, t_buffer *buffer, char *str, int nb)
 {
 	int	len;
 
-	len = ft_strlen(str);
+	len = ft_nbrlen((nb < 0 ? nb * -1 : nb), 10);
+	if (nb < 0)
+		ft_insert_format(buffer, &data, '-');
 	while (data.precision > len)
 	{
 		ft_insert_format(buffer, &data, '0');
@@ -34,9 +36,20 @@ static void	ft_left_padding(t_parse data, t_buffer *buffer, char *str, int nb)
 {
 	int	len;
 
-	len = ft_strlen(str);
+	len = ft_nbrlen((nb < 0 ? nb * -1 : nb), 10);
+	if (nb < 0 && data.fill == '0')
+		ft_insert_in_buffer(buffer, '-');
 	while (data.width > len && data.width > data.precision)
+	{
+		if (nb < 0 && (data.width == len + 1 ||
+		data.width == data.precision + 1))
+			break ;
 		ft_insert_format(buffer, &data, data.fill);
+	}
+	if (nb < 0 && data.fill == ' ')
+		ft_insert_in_buffer(buffer, '-');
+	else if (nb < 0 && data.precision > len)
+		ft_insert_format(buffer, &data, '0');
 	while (data.precision > len)
 	{
 		ft_insert_format(buffer, &data, '0');
@@ -48,18 +61,16 @@ static void	ft_left_padding(t_parse data, t_buffer *buffer, char *str, int nb)
 		ft_insert_str(buffer, &data, str);
 }
 
-void		ft_x(va_list ap, t_parse data, t_buffer *buffer)
+void		ft_d(va_list ap, t_parse data, t_buffer *buffer)
 {
-	unsigned int	nb;
-	char			*str;
+	int		nb;
+	char	*str;
 
-	nb = va_arg(ap, unsigned int);
-	str = ft_uitoa_base(nb, "0123456789abcdef");
-	if (str[0] == '0')
-	{
-		ft_strdel(str);
-		str = ft_strdup("0");
-	}
+	nb = va_arg(ap, int);
+	if (nb == -2147483648)
+		str = ft_strdup("2147483648");
+	else
+		str = ft_itoa((nb < 0 ? nb * -1 : nb));
 	if (data.padding)
 		ft_rigth_padding(data, buffer, str, nb);
 	else
@@ -67,23 +78,7 @@ void		ft_x(va_list ap, t_parse data, t_buffer *buffer)
 	ft_strdel(str);
 }
 
-void		ft_xu(va_list ap, t_parse data, t_buffer *buffer)
+void		ft_i(va_list ap, t_parse data, t_buffer *buffer)
 {
-	unsigned int	nb;
-	char			*str;
-
-	nb = va_arg(ap, unsigned int);
-	str = ft_uitoa_base(nb, "0123456789ABCDEF");
-	if (str[0] == '0')
-	{
-		ft_strdel(str);
-		str = ft_strdup("0");
-	}
-	if (data.padding)
-		ft_rigth_padding(data, buffer, str, nb);
-	else
-		ft_left_padding(data, buffer, str, nb);
-	ft_strdel(str);
+	ft_d(ap, data, buffer);
 }
-
-
