@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 17:33:12 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/02/04 17:28:32 by lucocozz         ###   ########.fr       */
+/*   Updated: 2020/02/04 19:01:51 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include "libft.h"
 # include <stdarg.h>
-# include <stdio.h>
 # include <stdint.h>
 
 # define TYPES "cspdiuxX%"
